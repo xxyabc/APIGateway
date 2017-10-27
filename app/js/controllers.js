@@ -20,6 +20,7 @@ apiGatewayCtrls.controller('StartCtrl', ['$scope',
         $scope.debug1 = '运行';
         $scope.debug2 = '调试';
         $scope.debug3 = '生成XML';
+        $scope.debug4 = 'XML文件导出';
         // $scope.items =[
         //  {title:"运行"},
         //  {title:"调试"},
@@ -40,7 +41,15 @@ apiGatewayCtrls.controller('StartCtrl', ['$scope',
             var xml_text = Blockly.Xml.domToText(xml);
             //alert(xml_text);
             $scope.xml = xml_text;
-        }
+        };
+
+        $scope.newfile = function(){
+            var txtdata = $scope.xml;
+            //alert(txtdata);
+            var content = ""+txtdata;
+            var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
+            saveAs(blob, "xmlfile.xml");//saveAs(blob,filename) //仅限于chorme的下载目录里
+        };
 
     }
 ]);
